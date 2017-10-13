@@ -1,0 +1,16 @@
+###
+# force HTTPS
+###
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+###
+# HSTS
+###
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=15552000; includeSubDomains; preload" "expr=%{HTTPS} == 'on'"
+</IfModule>
+
